@@ -5,7 +5,9 @@ function App() {
    return (
       <div className="App">
          <Navbar></Navbar>
-         <p>test</p>
+         <main className="ml-64 p-4">
+            <p>test</p>
+         </main>
       </div>
    );
 }
