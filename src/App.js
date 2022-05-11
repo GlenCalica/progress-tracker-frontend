@@ -11,17 +11,15 @@ import Profile from "./Profile";
 function App() {
    return (
       <BrowserRouter>
-         <div className="App">
-            <Navbar />
-            <main className="ml-64 p-4">
-               <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/metrics" element={<Metrics />} />
-                  <Route path="/profile" element={<Profile />} />
-                  <Route path="/settings" element={<Settings />} />
-               </Routes>
-            </main>
-         </div>
+         <Navbar />
+         <main className="ml-64 p-4 bg-slate-800">
+            <Routes>
+               <Route path="/" element={<Home />} />
+               <Route path="/metrics" element={<Metrics />} />
+               <Route path="/profile" element={<Profile />} />
+               <Route path="/settings" element={<Settings />} />
+            </Routes>
+         </main>
       </BrowserRouter>
    );
 }
