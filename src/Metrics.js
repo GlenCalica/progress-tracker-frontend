@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function Metrics() {
-   return <p>Metrics</p>;
+   return <h1>Metrics</h1>;
 }

@@ -12,7 +12,7 @@ function App() {
    return (
       <BrowserRouter>
          <Navbar />
-         <main className="ml-64 p-4 bg-slate-800">
+         <main className="ml-64 px-16 py-12">
             <Routes>
                <Route path="/" element={<Home />} />
                <Route path="/metrics" element={<Metrics />} />

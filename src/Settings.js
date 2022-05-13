@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function Settings() {
-   return <p>Settings</p>;
+   return <h1>Settings</h1>;
 }
