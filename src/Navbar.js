@@ -20,30 +20,54 @@ export default function Menu() {
                   <h1 className="text-lg text-gray-100">Progress Tracker</h1>
                </NavLink>
             </li>
-            <li className="my-2 py-1 px-2 rounded-md hover:bg-slate-800">
-               <NavLink to="/metrics" className="flex">
-                  <img src={barchart} alt="metrics icon" className="h-6 px-2" />
+            <li>
+               <NavLink
+                  to="/metrics"
+                  className={({ isActive }) =>
+                     isActive
+                        ? "flex my-2 py-2 px-2 rounded-md bg-slate-800"
+                        : "flex my-2 py-2 px-2 rounded-md hover:bg-slate-800"
+                  }
+               >
+                  <img src={barchart} alt="metrics icon" className="h-5 px-2" />
                   <p className="font-light text-gray-300">Metrics</p>
                </NavLink>
             </li>
             <li>
                <ul className="pl-8">
                   {metrics.map((metric) => (
-                     <li key={metric} className="font-light text-gray-100">
+                     <li
+                        key={metric}
+                        className="font-light text-sm py-2 text-gray-300"
+                     >
                         <NavLink to={"/metric/" + metric}>{metric}</NavLink>
                      </li>
                   ))}
                </ul>
             </li>
-            <li className="my-2 py-1 px-2 rounded-md hover:bg-slate-800">
-               <NavLink to="/profile" className="flex">
-                  <img src={person} alt="metrics icon" className="h-6 px-2" />
+            <li>
+               <NavLink
+                  to="/profile"
+                  className={({ isActive }) =>
+                     isActive
+                        ? "flex my-2 py-2 px-2 rounded-md bg-slate-800"
+                        : "flex my-2 py-2 px-2 rounded-md hover:bg-slate-800"
+                  }
+               >
+                  <img src={person} alt="metrics icon" className="h-5 px-2" />
                   <p className="font-light text-gray-300">Profile</p>
                </NavLink>
             </li>
-            <li className="my-2 py-1 px-2 rounded-md hover:bg-slate-800 absolute inset-x-4 bottom-0">
-               <NavLink to="/settings" className="flex">
-                  <img src={settings} alt="metrics icon" className="h-6 px-2" />
+            <li className="absolute inset-x-4 bottom-0">
+               <NavLink
+                  to="/settings"
+                  className={({ isActive }) =>
+                     isActive
+                        ? "flex my-2 py-2 px-2 rounded-md bg-slate-800"
+                        : "flex my-2 py-2 px-2 rounded-md hover:bg-slate-800"
+                  }
+               >
+                  <img src={settings} alt="metrics icon" className="h-5 px-2" />
                   <p className="font-light text-gray-300">Settings</p>
                </NavLink>
             </li>
