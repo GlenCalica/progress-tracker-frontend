@@ -5,6 +5,7 @@ import Navbar from "./Navbar";
 
 import Home from "./Home";
 import Metrics from "./Metrics";
+import Metric from "./Metric";
 import Settings from "./Settings";
 import Profile from "./Profile";
 
@@ -16,6 +17,7 @@ function App() {
             <Routes>
                <Route path="/" element={<Home />} />
                <Route path="/metrics" element={<Metrics />} />
+               <Route path="/metric/:name" element={<Metric />} />
                <Route path="/profile" element={<Profile />} />
                <Route path="/settings" element={<Settings />} />
             </Routes>
