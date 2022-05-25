@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
-import barchart from "./icons/bar-chart.svg";
-import person from "./icons/person.svg";
-import settings from "./icons/settings.svg";
+import barchart from "../icons/bar-chart.svg";
+import person from "../icons/person.svg";
+import settings from "../icons/settings.svg";
 
 export default function Menu() {
    const [metrics, setMetrics] = useState([]);

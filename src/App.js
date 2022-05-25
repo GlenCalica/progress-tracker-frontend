@@ -1,27 +1,35 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import "./App.css";
-import Navbar from "./Navbar";
+import Navbar from "./components/Navbar";
 
-import Home from "./Home";
-import Metrics from "./Metrics";
-import Metric from "./Metric";
-import Settings from "./Settings";
-import Profile from "./Profile";
+import Home from "./pages/Home";
+import Metrics from "./pages/Metrics";
+import Metric from "./pages/Metric";
+import Settings from "./pages/Settings";
+import Profile from "./pages/Profile";
+import NotFound from "./pages/NotFound";
 
 function App() {
+   const wrapNavbar = (page) => {
+      return (
+         <>
+            <Navbar />
+            <main className="ml-64 px-16 py-12">{page}</main>
+         </>
+      );
+   };
+
    return (
       <BrowserRouter>
-         <Navbar />
-         <main className="ml-64 px-16 py-12">
-            <Routes>
-               <Route path="/" element={<Home />} />
-               <Route path="/metrics" element={<Metrics />} />
-               <Route path="/metric/:name" element={<Metric />} />
-               <Route path="/profile" element={<Profile />} />
-               <Route path="/settings" element={<Settings />} />
-            </Routes>
-         </main>
+         <Routes>
+            <Route path="/" element={wrapNavbar(<Home />)} />
+            <Route path="/metrics" element={wrapNavbar(<Metrics />)} />
+            <Route path="/metric/:name" element={wrapNavbar(<Metric />)} />
+            <Route path="/profile" element={wrapNavbar(<Profile />)} />
+            <Route path="/settings" element={wrapNavbar(<Settings />)} />
+            <Route path="*" element={<NotFound />} />
+         </Routes>
       </BrowserRouter>
    );
 }
