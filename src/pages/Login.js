@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 
 export default function Login() {
    const [formData, setFormData] = useState({
@@ -20,33 +21,50 @@ export default function Login() {
    };
 
    return (
-      <>
-         <section>
-            <h1>Log in</h1>
-         </section>
-         <section>
-            <form onSubmit={onSubmit}>
-               <div>
+      <main className="grid place-content-center h-screen">
+         <form
+            onSubmit={onSubmit}
+            className="h-full p-12 rounded-xl bg-slate-200"
+            style={{ width: "32rem" }}
+         >
+            <h1 className="text-3xl">Log in</h1>
+            <div>
+               <div className="my-4">
+                  <label htmlFor="email">Email</label>
+                  <br />
                   <input
                      type="email"
                      id="email"
                      name="email"
                      value={email}
-                     placeholder="Enter your email"
                      onChange={onChange}
+                     className="w-full mt-1 p-2 rounded"
                   />
+               </div>
+               <div className="my-4">
+                  <label htmlFor="password">Password</label>
+                  <br />
                   <input
                      type="password"
                      id="password"
                      name="password"
                      value={password}
-                     placeholder="Enter your password"
                      onChange={onChange}
+                     className="w-full mt-1 p-2 rounded"
                   />
                </div>
-               <button type="submit">Submit</button>
-            </form>
-         </section>
-      </>
+            </div>
+            <button
+               type="submit"
+               className="w-36 my-2 p-3 rounded bg-slate-400"
+            >
+               Log In
+            </button>
+            <br />
+            <NavLink to="/register" className="w-12 text-sm font-medium">
+               Don't have an account?
+            </NavLink>
+         </form>
+      </main>
    );
 }

@@ -85,7 +85,7 @@ export default function Register() {
             </div>
             <button
                type="submit"
-               className="w-36 mt-4 mb-2 p-3 rounded bg-slate-400"
+               className="w-36 my-2 p-3 rounded bg-slate-400"
             >
                Sign Up
             </button>
