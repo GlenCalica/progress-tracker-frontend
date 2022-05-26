@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import "./App.css";
@@ -14,11 +15,31 @@ import Register from "./pages/Register";
 
 import NotFound from "./pages/NotFound";
 
+import AuthService from "./services/auth.service";
+
 function App() {
+   const [currentUser, setCurrentUser] = useState({
+      id: "",
+      name: "",
+      email: "",
+   });
+
+   const { id, name, email } = currentUser;
+
+   useEffect(() => {
+      const user = AuthService.getCurrentUser();
+
+      if (user) {
+         setCurrentUser(user);
+      } else {
+         console.log("user is null");
+      }
+   }, []);
+
    const wrapNavbar = (page) => {
       return (
          <>
-            <Navbar />
+            <Navbar user={currentUser} />
             <main className="ml-64 px-16 py-12">{page}</main>
          </>
       );

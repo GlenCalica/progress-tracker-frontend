@@ -1,16 +1,22 @@
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
+import  getMetrics  from "../services/user.service";
+
 import barchart from "../icons/bar-chart.svg";
 import person from "../icons/person.svg";
 import settings from "../icons/settings.svg";
 
-export default function Menu() {
+export default function Menu(props) {
    const [metrics, setMetrics] = useState([]);
 
    useEffect(() => {
-      setMetrics(["Dummy 1", "Dummy 2"]);
-   }, []);
+      if (props.user._id) {
+         getMetrics().then((res) => {
+            setMetrics(res.data);
+         })
+      }
+   }, [props.user]);
 
    return (
       <aside className="fixed top-0 bottom-0 left-0 w-64 p-4 bg-slate-900 border-r border-slate-600">
@@ -35,14 +41,15 @@ export default function Menu() {
             </li>
             <li>
                <ul className="pl-8">
-                  {metrics.map((metric) => (
+                  {metrics?
+                     metrics.map((metric) => (
                      <li
-                        key={metric}
+                        key={metric._id}
                         className="font-light text-sm py-2 text-gray-300"
                      >
-                        <NavLink to={"/metric/" + metric}>{metric}</NavLink>
+                        <NavLink to={"/metric/" + metric.name}>{metric.name}</NavLink>
                      </li>
-                  ))}
+                     )) : ""}
                </ul>
             </li>
             <li>

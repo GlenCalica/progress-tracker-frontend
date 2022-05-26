@@ -1,3 +1,10 @@
+import { useEffect } from "react";
+import authService from "../services/auth.service";
+
 export default function Profile() {
-   return <h1>Profile</h1>;
+   useEffect(() => {
+      console.log(authService.getCurrentUser());
+   })
+
+   return (<h1>Profile</h1>);
 }

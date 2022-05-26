@@ -1,5 +1,7 @@
-import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { useState, useEffect,  } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+
+import AuthService from "../services/auth.service";
 
 export default function Login() {
    const [formData, setFormData] = useState({
@@ -8,6 +10,8 @@ export default function Login() {
    });
 
    const { email, password } = formData;
+
+   const navigate = useNavigate();
 
    const onChange = (e) => {
       setFormData((prevState) => ({
@@ -18,6 +22,16 @@ export default function Login() {
 
    const onSubmit = (e) => {
       e.preventDefault();
+
+      AuthService.login(email, password)
+      .then((res) => {
+         console.log(res);
+         navigate("/");
+
+      }, err => {
+         console.log(err);
+      })
+
    };
 
    return (
