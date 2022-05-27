@@ -1,4 +1,4 @@
-import { useState, useEffect,  } from "react";
+import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
 import AuthService from "../services/auth.service";
@@ -23,15 +23,15 @@ export default function Login() {
    const onSubmit = (e) => {
       e.preventDefault();
 
-      AuthService.login(email, password)
-      .then((res) => {
-         console.log(res);
-         navigate("/");
-
-      }, err => {
-         console.log(err);
-      })
-
+      AuthService.login(email, password).then(
+         (res) => {
+            console.log(res);
+            navigate("/");
+         },
+         (err) => {
+            console.log(err);
+         }
+      );
    };
 
    return (

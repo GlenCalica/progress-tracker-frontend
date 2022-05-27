@@ -24,8 +24,6 @@ function App() {
       email: "",
    });
 
-   const { id, name, email } = currentUser;
-
    useEffect(() => {
       const user = AuthService.getCurrentUser();
 
@@ -39,7 +37,7 @@ function App() {
    const wrapNavbar = (page) => {
       return (
          <>
-            <Navbar user={currentUser} />
+            <Navbar user={currentUser} name={currentUser.name} />
             <main className="ml-64 px-16 py-12">{page}</main>
          </>
       );
