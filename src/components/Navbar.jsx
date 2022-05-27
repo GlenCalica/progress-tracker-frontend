@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
-import getMetrics from "../services/user.service";
+import MetricService from "../services/metric.service";
 
 import barchart from "../icons/bar-chart.svg";
 import person from "../icons/person.svg";
@@ -11,9 +11,9 @@ export default function Menu(props) {
    const [metrics, setMetrics] = useState([]);
 
    useEffect(() => {
-      if (props.user._id) {
-         getMetrics().then((res) => {
-            setMetrics(res.data);
+      if (props.user) {
+         MetricService.get().then((res) => {
+            setMetrics(res);
          });
       }
    }, [props.user]);

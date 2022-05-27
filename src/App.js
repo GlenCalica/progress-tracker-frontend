@@ -13,6 +13,8 @@ import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 
+import AddMetric from "./pages/AddMetric";
+
 import NotFound from "./pages/NotFound";
 
 import AuthService from "./services/auth.service";
@@ -53,6 +55,7 @@ function App() {
             <Route path="/settings" element={wrapNavbar(<Settings />)} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/addmetric" element={wrapNavbar(<AddMetric />)} />
             <Route path="*" element={<NotFound />} />
          </Routes>
       </BrowserRouter>
