@@ -16,13 +16,30 @@ class MetricService {
       return response.data;
    }
 
-   async update(data) {
-      const response = axios.put(API_URL, { headers: authHeader() }, data);
+   async update(name, data) {
+      const metrics = await this.get();
+
+      const metric = metrics.find((metric) => {
+         return metric.name === name;
+      });
+
+      const response = axios.put(API_URL + metric._id, data, {
+         headers: authHeader(),
+      });
       return response;
    }
 
-   async delete(id) {
-      const response = axios.delete(API_URL + id, { headers: authHeader() });
+   async delete(name) {
+      const metrics = await this.get();
+
+      const metric = metrics.find((metric) => {
+         return metric.name === name;
+      });
+
+      const response = axios.delete(API_URL + metric._id, {
+         headers: authHeader(),
+      });
+
       return response;
    }
 }
