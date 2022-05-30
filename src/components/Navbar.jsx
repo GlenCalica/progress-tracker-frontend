@@ -8,15 +8,14 @@ import person from "../icons/person.svg";
 import settings from "../icons/settings.svg";
 
 export default function Menu(props) {
-   const [metrics, setMetrics] = useState([]);
+   //Sets NavLink path to first metric or AddMetric page
+   const [firstMetric, setFirstMetric] = useState("/AddMetric");
 
    useEffect(() => {
-      if (props.user) {
-         MetricService.get().then((res) => {
-            setMetrics(res);
-         });
-      }
-   }, [props.user]);
+      MetricService.get().then((res) => {
+         if (res.length) setFirstMetric(`/metric/${res[0].name}`);
+      });
+   });
 
    return (
       <aside className="fixed top-0 bottom-0 left-0 w-64 p-4 bg-slate-900 border-r border-slate-600">
@@ -28,7 +27,7 @@ export default function Menu(props) {
             </li>
             <li>
                <NavLink
-                  to="/metrics"
+                  to={firstMetric}
                   className={({ isActive }) =>
                      isActive
                         ? "flex my-2 py-2 px-2 rounded-md bg-slate-800"
@@ -39,25 +38,7 @@ export default function Menu(props) {
                   <p className="font-light text-gray-300">Metrics</p>
                </NavLink>
             </li>
-            <li>
-               <ul className="pl-8">
-                  {metrics
-                     ? metrics.map((metric) => (
-                          <li
-                             key={metric._id}
-                             className="font-light text-sm py-2 text-gray-300"
-                          >
-                             <NavLink to={"/metric/" + metric.name}>
-                                {metric.name}
-                             </NavLink>
-                          </li>
-                       ))
-                     : ""}
-                  <li className="font-light text-sm py-2 text-gray-300">
-                     + Create New Metric
-                  </li>
-               </ul>
-            </li>
+
             <li>
                <NavLink
                   to="/profile"

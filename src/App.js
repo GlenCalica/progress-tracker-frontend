@@ -39,7 +39,7 @@ function App() {
    const wrapNavbar = (page) => {
       return (
          <>
-            <Navbar user={currentUser} name={currentUser.name} />
+            <Navbar name={currentUser.name} />
             <main className="ml-64 px-16 py-12">{page}</main>
          </>
       );
@@ -50,7 +50,11 @@ function App() {
          <Routes>
             <Route path="/" element={wrapNavbar(<Home />)} />
             <Route path="/metrics" element={wrapNavbar(<Metrics />)} />
-            <Route path="/metric/:name" element={wrapNavbar(<Metric />)} />
+            <Route
+               path="/metric/:name"
+               user={currentUser}
+               element={wrapNavbar(<Metric />)}
+            />
             <Route path="/profile" element={wrapNavbar(<Profile />)} />
             <Route path="/settings" element={wrapNavbar(<Settings />)} />
             <Route path="/login" element={<Login />} />
