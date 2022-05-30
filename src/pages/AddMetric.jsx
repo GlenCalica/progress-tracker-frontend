@@ -33,8 +33,7 @@ export default function AddMetric() {
       const metricNames = metrics.map((metric) => metric.name);
 
       if (!metricNames.includes(name)) {
-         const response = await MetricService.add(formData);
-         console.log(response);
+         await MetricService.add(formData);
          navigate(`/metric/${name}`);
       } else {
          console.log("metric already exists");

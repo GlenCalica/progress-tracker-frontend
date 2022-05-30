@@ -19,7 +19,6 @@ export default function Metric() {
    const redirect = () => {
       MetricService.get().then((res) => {
          if (res.length) {
-            console.log(`navigating to /metric/${res[0].name}`);
             navigate(`/metric/${res[0].name}`);
          } else {
             navigate("/addmetric");
