@@ -1,10 +1,115 @@
 import { useEffect } from "react";
-import authService from "../services/auth.service";
+import { useState } from "react";
+import UserService from "../services/user.service";
 
 export default function Profile() {
-   useEffect(() => {
-      console.log(authService.getCurrentUser());
+   const [formData, setFormData] = useState({
+      name: "",
+      email: "",
+      currentPassword: "",
+      newPassword: "",
+      confirmNewPassword: "",
    });
 
-   return <h1>Profile</h1>;
+   const { name, email, currentPassword, newPassword, confirmNewPassword } =
+      formData;
+
+   const onChange = (e) => {
+      setFormData((prevState) => ({
+         ...prevState,
+         [e.target.name]: e.target.value,
+      }));
+   };
+
+   const onSubmit = (e) => {
+      e.preventDefault();
+
+      console.log(formData);
+   };
+
+   useEffect(() => {
+      UserService.get().then((res) => {
+         setFormData((prevState) => ({
+            ...prevState,
+            name: res.name,
+            email: res.email,
+         }));
+      });
+   }, []);
+
+   return (
+      <form onSubmit={onSubmit} style={{ width: "32rem" }}>
+         <h1>Profile</h1>
+         <div>
+            <div className="my-4">
+               <label htmlFor="name">Name</label>
+               <br />
+               <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={name}
+                  onChange={onChange}
+                  className="w-full mt-1 p-2 rounded bg-slate-200"
+               />
+            </div>
+
+            <div className="my-4">
+               <label htmlFor="email">Email</label>
+               <br />
+               <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={email}
+                  onChange={onChange}
+                  className="w-full mt-1 p-2 rounded bg-slate-200"
+               />
+            </div>
+
+            <div className="my-4">
+               <label htmlFor="currentPassword">Current Password</label>
+               <br />
+               <input
+                  type="password"
+                  id="currentPassword"
+                  name="currentPassword"
+                  value={currentPassword}
+                  onChange={onChange}
+                  className="w-full mt-1 p-2 rounded bg-slate-200"
+               />
+            </div>
+
+            <div className="my-4">
+               <label htmlFor="newPassword">New Password</label>
+               <br />
+               <input
+                  type="password"
+                  id="newPassword"
+                  name="newPassword"
+                  value={newPassword}
+                  onChange={onChange}
+                  className="w-full mt-1 p-2 rounded bg-slate-200"
+               />
+            </div>
+
+            <div className="my-4">
+               <label htmlFor="confirmNewPassword">Confirm New Password</label>
+               <br />
+               <input
+                  type="password"
+                  id="confirmNewPassword"
+                  name="confirmNewPassword"
+                  value={confirmNewPassword}
+                  onChange={onChange}
+                  className="w-full mt-1 p-2 rounded bg-slate-200"
+               />
+            </div>
+         </div>
+         <button type="submit" className="w-36 my-2 p-3 rounded bg-slate-400">
+            Save
+         </button>
+         <br />
+      </form>
+   );
 }

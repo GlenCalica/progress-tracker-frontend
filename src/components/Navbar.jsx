@@ -15,7 +15,7 @@ export default function Menu(props) {
       MetricService.get().then((res) => {
          if (res.length) setFirstMetric(`/metric/${res[0].name}`);
       });
-   });
+   }, []);
 
    return (
       <aside className="fixed top-0 bottom-0 left-0 w-64 p-4 bg-slate-900 border-r border-slate-600">

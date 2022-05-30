@@ -9,7 +9,7 @@ export default function MetricsNavbar() {
       MetricService.get().then((res) => {
          setMetrics(res);
       });
-   });
+   }, []);
 
    return (
       <aside className="fixed top-0 bottom-0 left-64 w-64 p-4 bg-slate-800 border-r border-slate-600">
