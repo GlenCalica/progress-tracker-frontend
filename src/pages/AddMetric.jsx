@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import MetricService from "../services/metric.service";
+
+import MetricsNavbar from "../components/MetricsNavbar";
 
 export default function AddMetric() {
    const [formData, setFormData] = useState({
@@ -8,6 +11,8 @@ export default function AddMetric() {
    });
 
    const { name } = formData;
+
+   const navigate = useNavigate();
 
    const onChange = (e) => {
       setFormData((prevState) => ({
@@ -30,29 +35,36 @@ export default function AddMetric() {
       if (!metricNames.includes(name)) {
          const response = await MetricService.add(formData);
          console.log(response);
+         navigate(`/metric/${name}`);
       } else {
          console.log("metric already exists");
       }
    };
 
    return (
-      <form onSubmit={onSubmit}>
-         <h1>Add Metric</h1>
-         <div className="my-4">
-            <label htmlFor="name">Name</label>
-            <br />
-            <input
-               type="name"
-               id="name"
-               name="name"
-               value={name}
-               onChange={onChange}
-               className="w-full mt-1 p-2 rounded"
-            />
-         </div>
-         <button type="submit" className="w-36 my-2 p-3 rounded bg-slate-400">
-            Add Metric
-         </button>
-      </form>
+      <>
+         <MetricsNavbar />
+         <form onSubmit={onSubmit} className="ml-64">
+            <h1>Add Metric</h1>
+            <div className="my-4">
+               <label htmlFor="name">Name</label>
+               <br />
+               <input
+                  type="name"
+                  id="name"
+                  name="name"
+                  value={name}
+                  onChange={onChange}
+                  className="w-full mt-1 p-2 rounded"
+               />
+            </div>
+            <button
+               type="submit"
+               className="w-36 my-2 p-3 rounded bg-slate-400"
+            >
+               Add Metric
+            </button>
+         </form>
+      </>
    );
 }

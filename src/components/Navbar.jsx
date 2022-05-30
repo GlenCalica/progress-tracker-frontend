@@ -9,7 +9,7 @@ import settings from "../icons/settings.svg";
 
 export default function Menu(props) {
    //Sets NavLink path to first metric or AddMetric page
-   const [firstMetric, setFirstMetric] = useState("/AddMetric");
+   const [firstMetric, setFirstMetric] = useState("/addmetric");
 
    useEffect(() => {
       MetricService.get().then((res) => {
