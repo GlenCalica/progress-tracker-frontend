@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import "./App.css";
 import Navbar from "./components/Navbar";
@@ -50,15 +50,14 @@ function App() {
          <Routes>
             <Route path="/" element={wrapNavbar(<Home />)} />
             <Route path="/metrics" element={wrapNavbar(<Metrics />)} />
-            <Route
-               path="/metric/:name"
-               user={currentUser}
-               element={wrapNavbar(<Metric />)}
-            />
+            <Route path="/metric/:name" element={wrapNavbar(<Metric />)} />
             <Route path="/profile" element={wrapNavbar(<Profile />)} />
             <Route path="/settings" element={wrapNavbar(<Settings />)} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login setUser={setCurrentUser} />} />
+            <Route
+               path="/register"
+               element={<Register setUser={setCurrentUser} />}
+            />
             <Route path="/addmetric" element={wrapNavbar(<AddMetric />)} />
             <Route path="*" element={<NotFound />} />
          </Routes>

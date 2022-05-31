@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import AuthService from "../services/auth.service";
 
-export default function Register() {
+export default function Register(props) {
    const [formData, setFormData] = useState({
       name: "",
       email: "",
@@ -37,6 +37,8 @@ export default function Register() {
          //register, login, and redirect to "/". This cannot be done asynchronously
          AuthService.register(name, email, password).then((res) => {
             AuthService.login(email, password).then((res) => {
+               const user = AuthService.getCurrentUser();
+               props.setUser(user);
                navigate("/");
             });
          });

@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 import AuthService from "../services/auth.service";
 
-export default function Login() {
+export default function Login(props) {
    const [formData, setFormData] = useState({
       email: "",
       password: "",
@@ -25,6 +25,8 @@ export default function Login() {
 
       AuthService.login(email, password).then(
          (res) => {
+            const user = AuthService.getCurrentUser();
+            props.setUser(user);
             navigate("/");
          },
          (err) => {
