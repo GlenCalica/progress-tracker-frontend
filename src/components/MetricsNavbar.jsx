@@ -12,13 +12,14 @@ export default function MetricsNavbar() {
    }, []);
 
    return (
-      <aside className="fixed top-0 bottom-0 left-64 w-64 p-4 bg-slate-800 border-r border-slate-600">
-         <ul className="pl-8">
+      <aside className="fixed top-0 bottom-0 left-56 w-56 py-6 px-8 bg-slate-800 border-r border-slate-600">
+         <h1 className="text-base text-gray-100">Metrics</h1>
+         <ul>
             {metrics
                ? metrics.map((metric) => (
                     <li
                        key={metric._id}
-                       className="font-light text-sm py-2 text-gray-300"
+                       className="font-light text-sm truncate py-2 text-gray-300"
                     >
                        <NavLink to={"/metric/" + metric.name}>
                           {metric.name}

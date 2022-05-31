@@ -30,7 +30,7 @@ export default function UpdateMetricForm(props) {
    };
 
    return (
-      <form onSubmit={onSubmit}>
+      <form className="p-6 rounded-xl bg-slate-200" onSubmit={onSubmit}>
          <div className="my-4">
             <label htmlFor="name">New Name</label>
             <br />

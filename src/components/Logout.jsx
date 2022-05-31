@@ -9,5 +9,9 @@ export default function Logout() {
       navigate("/login");
    };
 
-   return <button onClick={logout}>Logout</button>;
+   return (
+      <button className="w-36 my-2 p-3 rounded bg-slate-400" onClick={logout}>
+         Logout
+      </button>
+   );
 }

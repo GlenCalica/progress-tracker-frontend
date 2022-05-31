@@ -29,10 +29,15 @@ export default function Metric() {
    return (
       <>
          <MetricsNavbar />
-         <section className="ml-64">
+         <section className="ml-56">
             <h1>{param.name}</h1>
             <UpdateMetricForm name={param.name} />
-            <button onClick={deleteMetric}>Delete Metric</button>
+            <button
+               className="w-36 my-2 p-3 rounded bg-slate-400"
+               onClick={deleteMetric}
+            >
+               Delete Metric
+            </button>
          </section>
       </>
    );

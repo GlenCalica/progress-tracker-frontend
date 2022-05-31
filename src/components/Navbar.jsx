@@ -18,7 +18,7 @@ export default function Menu(props) {
    }, []);
 
    return (
-      <aside className="fixed top-0 bottom-0 left-0 w-64 p-4 bg-slate-900 border-r border-slate-600">
+      <aside className="fixed top-0 bottom-0 left-0 w-56 p-4 bg-slate-900 border-r border-slate-600">
          <ul>
             <li className="mb-2 py-1 px-2">
                <NavLink to="/">

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import "./App.css";
 import Navbar from "./components/Navbar";
@@ -40,7 +40,7 @@ function App() {
       return (
          <>
             <Navbar name={currentUser.name} />
-            <main className="ml-64 px-16 py-12">{page}</main>
+            <main className="ml-56 px-16 py-12">{page}</main>
          </>
       );
    };

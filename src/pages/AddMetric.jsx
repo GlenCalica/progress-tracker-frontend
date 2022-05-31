@@ -43,27 +43,29 @@ export default function AddMetric() {
    return (
       <>
          <MetricsNavbar />
-         <form onSubmit={onSubmit} className="ml-64">
+         <section className="ml-56">
             <h1>Add Metric</h1>
-            <div className="my-4">
-               <label htmlFor="name">Name</label>
-               <br />
-               <input
-                  type="name"
-                  id="name"
-                  name="name"
-                  value={name}
-                  onChange={onChange}
-                  className="w-full mt-1 p-2 rounded"
-               />
-            </div>
-            <button
-               type="submit"
-               className="w-36 my-2 p-3 rounded bg-slate-400"
-            >
-               Add Metric
-            </button>
-         </form>
+            <form onSubmit={onSubmit} className="p-6 rounded-xl bg-slate-200">
+               <div className="my-4">
+                  <label htmlFor="name">Name</label>
+                  <br />
+                  <input
+                     type="name"
+                     id="name"
+                     name="name"
+                     value={name}
+                     onChange={onChange}
+                     className="w-full mt-1 p-2 rounded"
+                  />
+               </div>
+               <button
+                  type="submit"
+                  className="w-36 my-2 p-3 rounded bg-slate-400"
+               >
+                  Add Metric
+               </button>
+            </form>
+         </section>
       </>
    );
 }
