@@ -25,7 +25,6 @@ export default function Login() {
 
       AuthService.login(email, password).then(
          (res) => {
-            console.log(res);
             navigate("/");
          },
          (err) => {

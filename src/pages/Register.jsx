@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import AuthService from "../services/auth.service";
 
 export default function Register() {
    const [formData, setFormData] = useState({
@@ -11,6 +12,17 @@ export default function Register() {
 
    const { name, email, password, confirmPassword } = formData;
 
+   const navigate = useNavigate();
+
+   //redirect user to "/" if logged in
+   useEffect(() => {
+      const user = AuthService.getCurrentUser();
+
+      if (user) {
+         navigate("/");
+      }
+   });
+
    const onChange = (e) => {
       setFormData((prevState) => ({
          ...prevState,
@@ -20,6 +32,15 @@ export default function Register() {
 
    const onSubmit = (e) => {
       e.preventDefault();
+
+      if (password === confirmPassword) {
+         //register, login, and redirect to "/". This cannot be done asynchronously
+         AuthService.register(name, email, password).then((res) => {
+            AuthService.login(email, password).then((res) => {
+               navigate("/");
+            });
+         });
+      }
    };
 
    return (
@@ -74,7 +95,7 @@ export default function Register() {
                   <label htmlFor="confirmPassword">Confirm Password</label>
                   <br />
                   <input
-                     type="confirmPassword"
+                     type="password"
                      id="confirmPassword"
                      name="confirmPassword"
                      value={confirmPassword}
