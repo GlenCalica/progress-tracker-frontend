@@ -21,10 +21,15 @@ export default function UpdateMetricForm(props) {
    const onSubmit = (e) => {
       e.preventDefault();
 
-      updateMetrics(props.name, name);
-      MetricService.update(props.name, formData).then((res) => {
-         navigate(`/metric/${name}`);
-      });
+      MetricService.update(props.name, formData).then(
+         (res) => {
+            updateMetrics(props.name, name);
+            navigate(`/metric/${name}`);
+         },
+         (err) => {
+            console.log(err);
+         }
+      );
    };
 
    const updateMetrics = (prevName, name) => {
