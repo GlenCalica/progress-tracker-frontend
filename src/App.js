@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import "./App.css";
-import Navbar from "./components/Navbar";
 
 import Home from "./pages/Home";
 import Metrics from "./pages/Metrics";
@@ -13,11 +12,14 @@ import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 
+import Navbar from "./components/Navbar";
+import MetricsNavbar from "./components/MetricsNavbar";
 import AddMetric from "./pages/AddMetric";
 
 import NotFound from "./pages/NotFound";
 
 import AuthService from "./services/auth.service";
+import MetricService from "./services/metric.service";
 
 function App() {
    const [currentUser, setCurrentUser] = useState({
@@ -25,6 +27,8 @@ function App() {
       name: "",
       email: "",
    });
+
+   const [metrics, setMetrics] = useState([]);
 
    useEffect(() => {
       const user = AuthService.getCurrentUser();
@@ -34,6 +38,10 @@ function App() {
       } else {
          console.log("user is null");
       }
+
+      MetricService.get().then((res) => {
+         setMetrics(res);
+      });
    }, []);
 
    const wrapNavbar = (page) => {
@@ -45,12 +53,26 @@ function App() {
       );
    };
 
+   const wrapMetricsNavbar = (page) => {
+      return wrapNavbar(
+         <>
+            <MetricsNavbar metrics={metrics} />
+            {page}
+         </>
+      );
+   };
+
    return (
       <BrowserRouter>
          <Routes>
             <Route path="/" element={wrapNavbar(<Home />)} />
             <Route path="/metrics" element={wrapNavbar(<Metrics />)} />
-            <Route path="/metric/:name" element={wrapNavbar(<Metric />)} />
+            <Route
+               path="/metric/:name"
+               element={wrapMetricsNavbar(
+                  <Metric metrics={metrics} setMetrics={setMetrics} />
+               )}
+            />
             <Route path="/profile" element={wrapNavbar(<Profile />)} />
             <Route path="/settings" element={wrapNavbar(<Settings />)} />
             <Route path="/login" element={<Login setUser={setCurrentUser} />} />
@@ -58,7 +80,12 @@ function App() {
                path="/register"
                element={<Register setUser={setCurrentUser} />}
             />
-            <Route path="/addmetric" element={wrapNavbar(<AddMetric />)} />
+            <Route
+               path="/addmetric"
+               element={wrapMetricsNavbar(
+                  <AddMetric metrics={metrics} setMetrics={setMetrics} />
+               )}
+            />
             <Route path="*" element={<NotFound />} />
          </Routes>
       </BrowserRouter>

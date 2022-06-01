@@ -3,9 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import MetricService from "../services/metric.service";
 
-import MetricsNavbar from "../components/MetricsNavbar";
-
-export default function AddMetric() {
+export default function AddMetric(props) {
    const [formData, setFormData] = useState({
       name: "",
    });
@@ -21,7 +19,7 @@ export default function AddMetric() {
       }));
    };
 
-   const onSubmit = async (e) => {
+   const onSubmit = (e) => {
       e.preventDefault();
 
       setFormData((prevState) => ({
@@ -29,20 +27,32 @@ export default function AddMetric() {
          [e.target.name]: e.target.value,
       }));
 
-      const metrics = await MetricService.get();
-      const metricNames = metrics.map((metric) => metric.name);
+      //checks if metric exists and adds it
+      MetricService.get()
+         .then((res) => res.map((metric) => metric.name))
+         .then((res) => {
+            if (!res.includes(name)) {
+               MetricService.add(formData).then((res) => {
+                  updateMetrics();
+                  navigate(`/metric/${name}`);
+               });
+            } else {
+               console.log("metric already exists");
+            }
+         });
+   };
 
-      if (!metricNames.includes(name)) {
-         await MetricService.add(formData);
-         navigate(`/metric/${name}`);
-      } else {
-         console.log("metric already exists");
-      }
+   const updateMetrics = () => {
+      MetricService.get().then((res) => {
+         const newMetric = res.find((metric) => {
+            return metric.name === name;
+         });
+         props.setMetrics((prevState) => [...prevState, newMetric]);
+      });
    };
 
    return (
       <>
-         <MetricsNavbar />
          <section className="ml-56">
             <h1>Add Metric</h1>
             <form onSubmit={onSubmit} className="p-6 rounded-xl bg-slate-200">

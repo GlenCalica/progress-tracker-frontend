@@ -1,22 +1,12 @@
-import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import MetricService from "../services/metric.service";
 
-export default function MetricsNavbar() {
-   const [metrics, setMetrics] = useState([]);
-
-   useEffect(() => {
-      MetricService.get().then((res) => {
-         setMetrics(res);
-      });
-   }, []);
-
+export default function MetricsNavbar(props) {
    return (
       <aside className="fixed top-0 bottom-0 left-56 w-56 py-6 px-8 bg-slate-800 border-r border-slate-600">
          <h1 className="text-base text-gray-100">Metrics</h1>
          <ul>
-            {metrics
-               ? metrics.map((metric) => (
+            {props.metrics
+               ? props.metrics.map((metric) => (
                     <li
                        key={metric._id}
                        className="font-light text-sm truncate py-2 text-gray-300"

@@ -1,17 +1,21 @@
 import { useNavigate, useParams } from "react-router-dom";
 
-import MetricService from "../services/metric.service";
-
-import MetricsNavbar from "../components/MetricsNavbar";
 import UpdateMetricForm from "../components/UpdateMetricForm";
 
-export default function Metric() {
+import MetricService from "../services/metric.service";
+
+export default function Metric(props) {
    const navigate = useNavigate();
    let param = useParams();
 
    const deleteMetric = () => {
       MetricService.delete(param.name).then(
-         (res) => redirect(),
+         (res) => {
+            props.setMetrics((prevState) =>
+               prevState.filter((metric) => metric.name !== param.name)
+            );
+            redirect();
+         },
          (err) => console.log(err)
       );
    };
@@ -28,10 +32,13 @@ export default function Metric() {
 
    return (
       <>
-         <MetricsNavbar />
          <section className="ml-56">
             <h1>{param.name}</h1>
-            <UpdateMetricForm name={param.name} />
+            <UpdateMetricForm
+               name={param.name}
+               metrics={props.metrics}
+               setMetrics={props.setMetrics}
+            />
             <button
                className="w-36 my-2 p-3 rounded bg-slate-400"
                onClick={deleteMetric}

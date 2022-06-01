@@ -21,12 +21,26 @@ export default function UpdateMetricForm(props) {
    const onSubmit = (e) => {
       e.preventDefault();
 
-      MetricService.update(props.name, formData).then(
-         (res) => console.log(res),
-         (err) => console.log(err)
-      );
+      updateMetrics(props.name, name);
+      MetricService.update(props.name, formData).then((res) => {
+         navigate(`/metric/${name}`);
+      });
+   };
 
-      navigate(`/metric/${name}`);
+   const updateMetrics = (prevName, name) => {
+      const metric = props.metrics.find((metric) => {
+         return metric.name === prevName;
+      });
+
+      //I'm guessing this assigns by reference?
+      const index = props.metrics.indexOf(metric);
+      const metrics = props.metrics;
+
+      //This changes props.metrics directly
+      metrics[index].name = name;
+
+      //Assign prevState to [...prevState] solely to update itself
+      props.setMetrics((prevState) => [...prevState]);
    };
 
    return (
