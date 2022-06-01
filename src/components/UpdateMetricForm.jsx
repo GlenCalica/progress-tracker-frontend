@@ -21,15 +21,19 @@ export default function UpdateMetricForm(props) {
    const onSubmit = (e) => {
       e.preventDefault();
 
-      MetricService.update(props.name, formData).then(
-         (res) => {
-            updateMetrics(props.name, name);
-            navigate(`/metric/${name}`);
-         },
-         (err) => {
-            console.log(err);
-         }
-      );
+      if (name !== "") {
+         MetricService.update(props.name, formData).then(
+            (res) => {
+               updateMetrics(props.name, name);
+               navigate(`/metric/${name}`);
+            },
+            (err) => {
+               console.log(err);
+            }
+         );
+      }
+
+      props.toggle();
    };
 
    const updateMetrics = (prevName, name) => {
@@ -49,9 +53,12 @@ export default function UpdateMetricForm(props) {
    };
 
    return (
-      <form className="p-6 rounded-xl bg-slate-200" onSubmit={onSubmit}>
-         <div className="my-4">
-            <label htmlFor="name">New Name</label>
+      <form onSubmit={onSubmit}>
+         <div className="px-6 py-4 rounded-t-lg bg-slate-300">
+            <h1 className="text-lg font-normal">Editing {props.name}</h1>
+         </div>
+         <div className="p-6">
+            <label htmlFor="name">Metric Name</label>
             <br />
             <input
                type="name"
@@ -61,10 +68,13 @@ export default function UpdateMetricForm(props) {
                onChange={onChange}
                className="w-full mt-1 p-2 rounded"
             />
+            <button
+               type="submit"
+               className="w-24 mt-4 p-2 r-0 rounded bg-slate-400"
+            >
+               Save
+            </button>
          </div>
-         <button type="submit" className="w-36 my-2 p-3 rounded bg-slate-400">
-            Update Metric
-         </button>
       </form>
    );
 }
