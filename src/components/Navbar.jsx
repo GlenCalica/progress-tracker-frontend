@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
-
-import MetricService from "../services/metric.service";
+import { NavLink, useLocation } from "react-router-dom";
 
 import barchart from "../icons/bar-chart.svg";
 import person from "../icons/person.svg";
@@ -11,11 +9,12 @@ export default function Menu(props) {
    //Sets NavLink path to first metric or AddMetric page
    const [firstMetric, setFirstMetric] = useState("/addmetric");
 
+   const location = useLocation();
+
    useEffect(() => {
-      MetricService.get().then((res) => {
-         if (res.length) setFirstMetric(`/metric/${res[0].name}`);
-      });
-   }, []);
+      if (props.metrics.length)
+         setFirstMetric(`/metric/${props.metrics[0].name}`);
+   }, [props.metrics]);
 
    return (
       <aside className="fixed top-0 bottom-0 left-0 w-56 p-4 bg-slate-900 border-r border-slate-600">
@@ -28,8 +27,9 @@ export default function Menu(props) {
             <li>
                <NavLink
                   to={firstMetric}
-                  className={({ isActive }) =>
-                     isActive
+                  className={
+                     location.pathname.startsWith("/metric/") ||
+                     location.pathname === "/addmetric"
                         ? "flex my-2 py-2 px-2 rounded-md bg-slate-800"
                         : "flex my-2 py-2 px-2 rounded-md hover:bg-slate-800"
                   }

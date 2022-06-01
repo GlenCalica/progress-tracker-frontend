@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 
 import Home from "./pages/Home";
-import Metrics from "./pages/Metrics";
 import Metric from "./pages/Metric";
 import Settings from "./pages/Settings";
 import Profile from "./pages/Profile";
@@ -47,7 +46,7 @@ function App() {
    const wrapNavbar = (page) => {
       return (
          <>
-            <Navbar name={currentUser.name} />
+            <Navbar name={currentUser.name} metrics={metrics} />
             <main className="ml-56 px-16 py-12">{page}</main>
          </>
       );
@@ -66,7 +65,6 @@ function App() {
       <BrowserRouter>
          <Routes>
             <Route path="/" element={wrapNavbar(<Home />)} />
-            <Route path="/metrics" element={wrapNavbar(<Metrics />)} />
             <Route
                path="/metric/:name"
                element={wrapMetricsNavbar(

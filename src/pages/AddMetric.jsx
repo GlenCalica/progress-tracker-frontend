@@ -22,33 +22,21 @@ export default function AddMetric(props) {
    const onSubmit = (e) => {
       e.preventDefault();
 
-      setFormData((prevState) => ({
-         ...prevState,
-         [e.target.name]: e.target.value,
-      }));
+      //Find if metric already exists
+      const metricNames = props.metrics.map((metric) => metric.name);
 
-      //checks if metric exists and adds it
-      MetricService.get()
-         .then((res) => res.map((metric) => metric.name))
-         .then((res) => {
-            if (!res.includes(name)) {
-               MetricService.add(formData).then((res) => {
-                  updateMetrics();
-                  navigate(`/metric/${name}`);
-               });
-            } else {
-               console.log("metric already exists");
-            }
+      if (!metricNames.includes(name)) {
+         //Add new metric
+         MetricService.add(formData);
+         //Need to make an api call to get the new metric id
+         MetricService.get().then((res) => {
+            const newMetric = res.find((metric) => metric.name === name);
+            props.setMetrics((prevState) => [...prevState, newMetric]);
+            navigate(`/metric/${name}`);
          });
-   };
-
-   const updateMetrics = () => {
-      MetricService.get().then((res) => {
-         const newMetric = res.find((metric) => {
-            return metric.name === name;
-         });
-         props.setMetrics((prevState) => [...prevState, newMetric]);
-      });
+      } else {
+         console.log("metric already exists");
+      }
    };
 
    return (

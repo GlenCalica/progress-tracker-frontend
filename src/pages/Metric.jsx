@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import UpdateMetricForm from "../components/UpdateMetricForm";
@@ -6,7 +7,17 @@ import MetricService from "../services/metric.service";
 
 export default function Metric(props) {
    const navigate = useNavigate();
+
    let param = useParams();
+
+   useEffect(() => {
+      const metricNames = props.metrics.map((metric) => metric.name);
+
+      if (!metricNames.includes(param.name)) {
+         console.log("metric doesn't exist");
+         navigate("/addmetric");
+      }
+   });
 
    const deleteMetric = () => {
       MetricService.delete(param.name).then(
@@ -14,20 +25,10 @@ export default function Metric(props) {
             props.setMetrics((prevState) =>
                prevState.filter((metric) => metric.name !== param.name)
             );
-            redirect();
+            navigate("/addmetric");
          },
          (err) => console.log(err)
       );
-   };
-
-   const redirect = () => {
-      MetricService.get().then((res) => {
-         if (res.length) {
-            navigate(`/metric/${res[0].name}`);
-         } else {
-            navigate("/addmetric");
-         }
-      });
    };
 
    return (

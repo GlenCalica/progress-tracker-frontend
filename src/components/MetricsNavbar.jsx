@@ -18,7 +18,7 @@ export default function MetricsNavbar(props) {
                  ))
                : ""}
             <li className="font-light text-sm py-2 text-gray-300">
-               <NavLink to="/AddMetric">
+               <NavLink to="/addmetric">
                   <p className="font-light text-gray-300">
                      + Create New Metric
                   </p>
