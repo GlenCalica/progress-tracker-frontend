@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 import UpdateUserPassword from "../components/UpdateUserPassword";
+import DeleteUser from "../components/DeleteUser";
 
 import UserService from "../services/user.service";
 
@@ -29,6 +30,7 @@ export default function Profile() {
          <p>Email: {email}</p>
 
          <UpdateUserPassword />
+         <DeleteUser />
       </>
    );
 }

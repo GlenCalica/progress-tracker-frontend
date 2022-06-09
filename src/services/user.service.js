@@ -24,17 +24,18 @@ class UserService {
       return response;
    }
 
-   // async delete() {
-   //    const user = await this.get();
+   async delete(password) {
+      const user = await this.get();
 
-   //    const response = axios.delete(API_URL + user._id, {
-   //       headers: authHeader(),
-   //    });
+      console.log(authHeader());
 
-   //    AuthService.logout();
+      const response = axios.delete(API_URL + user._id, {
+         data: { password },
+         headers: authHeader(),
+      });
 
-   //    return response;
-   // }
+      return response;
+   }
 }
 
 export default new UserService();
