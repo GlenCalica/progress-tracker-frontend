@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import PopupWrapper from "../components/PopupWrapper";
 import UpdateMetricForm from "../components/UpdateMetricForm";
 import DeleteMetric from "../components/DeleteMetric";
+import EntriesTable from "../components/EntriesTable";
 
 export default function Metric(props) {
    const [popup, setPopup] = useState(false);
@@ -48,6 +49,7 @@ export default function Metric(props) {
                }
             />
             <DeleteMetric name={param.name} setMetrics={props.setMetrics} />
+            <EntriesTable metric={param.name} />
          </section>
       </>
    );
