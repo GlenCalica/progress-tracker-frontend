@@ -27,8 +27,6 @@ class UserService {
    async delete(password) {
       const user = await this.get();
 
-      console.log(authHeader());
-
       const response = axios.delete(API_URL + user._id, {
          data: { password },
          headers: authHeader(),

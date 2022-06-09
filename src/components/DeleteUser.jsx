@@ -17,7 +17,7 @@ export default function Logout() {
       e.preventDefault();
 
       UserService.delete(password).then((res) => {
-         // AuthService.logout();
+         AuthService.logout();
          navigate("/login");
       });
    };
