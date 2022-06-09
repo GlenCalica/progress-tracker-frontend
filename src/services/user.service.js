@@ -9,12 +9,17 @@ class UserService {
       return AuthService.getCurrentUser();
    }
 
-   async update(data) {
+   //Only updates user password
+   async update(oldPassword, newPassword) {
       const user = await this.get();
 
-      const response = axios.put(API_URL + user._id, data, {
-         headers: authHeader(),
-      });
+      const response = axios.put(
+         API_URL + user._id,
+         { oldPassword, newPassword },
+         {
+            headers: authHeader(),
+         }
+      );
 
       return response;
    }

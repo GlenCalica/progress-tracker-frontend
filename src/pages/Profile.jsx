@@ -24,7 +24,12 @@ export default function Profile() {
    const onSubmit = (e) => {
       e.preventDefault();
 
-      console.log(formData);
+      if (newPassword === confirmNewPassword) {
+         UserService.update(currentPassword, newPassword);
+         console.log("updated");
+      } else {
+         console.log("passwords do not match");
+      }
    };
 
    useEffect(() => {
@@ -56,6 +61,7 @@ export default function Profile() {
                      value={name}
                      onChange={onChange}
                      className="w-full mt-1 p-2 rounded"
+                     readOnly
                   />
                </div>
 
@@ -69,6 +75,7 @@ export default function Profile() {
                      value={email}
                      onChange={onChange}
                      className="w-full mt-1 p-2 rounded"
+                     readOnly
                   />
                </div>
 
