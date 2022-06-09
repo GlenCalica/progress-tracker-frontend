@@ -3,8 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import PopupWrapper from "../components/PopupWrapper";
 import UpdateMetricForm from "../components/UpdateMetricForm";
-
-import MetricService from "../services/metric.service";
+import DeleteMetric from "../components/DeleteMetric";
 
 export default function Metric(props) {
    const [popup, setPopup] = useState(false);
@@ -21,18 +20,6 @@ export default function Metric(props) {
          navigate("/addmetric");
       }
    });
-
-   const deleteMetric = () => {
-      MetricService.delete(param.name).then(
-         (res) => {
-            props.setMetrics((prevState) =>
-               prevState.filter((metric) => metric.name !== param.name)
-            );
-            navigate("/addmetric");
-         },
-         (err) => console.log(err)
-      );
-   };
 
    const togglePopup = () => {
       setPopup(!popup);
@@ -60,13 +47,7 @@ export default function Metric(props) {
                   />
                }
             />
-
-            <button
-               className="w-36 my-2 p-3 rounded bg-slate-400"
-               onClick={deleteMetric}
-            >
-               Delete Metric
-            </button>
+            <DeleteMetric name={param.name} setMetrics={props.setMetrics} />
          </section>
       </>
    );
