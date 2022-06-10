@@ -61,10 +61,23 @@ function App() {
       );
    };
 
+   const clearData = () => {
+      setCurrentUser({
+         id: "",
+         name: "",
+         email: "",
+      });
+
+      setMetrics(null);
+   };
+
    return (
       <BrowserRouter>
          <Routes>
-            <Route path="/" element={wrapNavbar(<Home />)} />
+            <Route
+               path="/"
+               element={wrapNavbar(<Home clearData={clearData} />)}
+            />
             <Route
                path="/metric/:name"
                element={wrapMetricsNavbar(
@@ -73,7 +86,12 @@ function App() {
             />
             <Route path="/profile" element={wrapNavbar(<Profile />)} />
             <Route path="/settings" element={wrapNavbar(<Settings />)} />
-            <Route path="/login" element={<Login setUser={setCurrentUser} />} />
+            <Route
+               path="/login"
+               element={
+                  <Login setUser={setCurrentUser} setMetrics={setMetrics} />
+               }
+            />
             <Route
                path="/register"
                element={<Register setUser={setCurrentUser} />}

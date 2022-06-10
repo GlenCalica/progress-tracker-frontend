@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import AuthService from "../services/auth.service";
 
-export default function Logout() {
+export default function Logout(props) {
    const navigate = useNavigate();
 
    const logout = () => {
+      props.clearData();
       AuthService.logout();
       navigate("/login");
    };

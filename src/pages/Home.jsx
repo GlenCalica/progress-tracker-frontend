@@ -1,10 +1,10 @@
 import Logout from "../components/Logout";
 
-export default function Home() {
+export default function Home(props) {
    return (
       <>
          <h1>Home</h1>
-         <Logout />
+         <Logout clearData={props.clearData} />
       </>
    );
 }

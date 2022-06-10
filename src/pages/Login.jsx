@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
 import AuthService from "../services/auth.service";
+import MetricService from "../services/metric.service";
 
 export default function Login(props) {
    const [formData, setFormData] = useState({
@@ -27,6 +28,9 @@ export default function Login(props) {
          (res) => {
             const user = AuthService.getCurrentUser();
             props.setUser(user);
+            MetricService.get().then((res) => {
+               props.setMetrics(res);
+            });
             navigate("/");
          },
          (err) => {
