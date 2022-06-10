@@ -7,14 +7,35 @@ import DeleteMetric from "../components/DeleteMetric";
 import EntriesTable from "../components/EntriesTable";
 import AddEntryForm from "../components/AddEntryForm";
 
-export default function Metric(props) {
-   const [popup, setPopup] = useState(false);
+import EntryService from "../services/entry.service";
 
+export default function Metric(props) {
    const navigate = useNavigate();
 
    let param = useParams();
 
+   //for UpdateMetricForm
+   const [popup, setPopup] = useState(false);
+
+   const togglePopup = () => {
+      setPopup(!popup);
+   };
+
+   //for EntriesTable and AddEntryForm
+   const [entries, setEntries] = useState([]);
+
+   const updateEntries = () => {
+      EntryService.get(param.name).then((res) => {
+         setEntries(res);
+      });
+   };
+
    useEffect(() => {
+      EntryService.get(param.name).then((res) => {
+         setEntries(res);
+      });
+
+      //redirect if metric doesn't exist
       const metricNames = props.metrics.map((metric) => metric.name);
 
       if (!metricNames.includes(param.name)) {
@@ -22,10 +43,6 @@ export default function Metric(props) {
          navigate("/addmetric");
       }
    });
-
-   const togglePopup = () => {
-      setPopup(!popup);
-   };
 
    return (
       <>
@@ -50,8 +67,8 @@ export default function Metric(props) {
                }
             />
             <DeleteMetric name={param.name} setMetrics={props.setMetrics} />
-            <AddEntryForm metric={param.name} />
-            <EntriesTable metric={param.name} />
+            <AddEntryForm metric={param.name} updateEntries={updateEntries} />
+            <EntriesTable metric={param.name} entries={entries} />
          </section>
       </>
    );

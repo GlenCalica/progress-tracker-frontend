@@ -20,19 +20,17 @@ export default function AddEntryForm(props) {
    const onSubmit = (e) => {
       e.preventDefault();
 
-      console.log(props.metric);
-
       EntryService.add({
          metric: props.metric,
          ...formData,
-      }).then((res) => {
-         console.log(res);
       });
 
       setFormData({
          date: "",
          value: "",
       });
+
+      props.updateEntries();
    };
 
    return (
