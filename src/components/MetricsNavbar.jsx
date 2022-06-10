@@ -6,20 +6,22 @@ export default function MetricsNavbar(props) {
          <h1 className="text-base text-gray-100">Metrics</h1>
          <ul>
             {props.metrics
-               ? props.metrics.map((metric) => (
-                    <li key={metric._id} className="text-sm truncate py-2">
-                       <NavLink
-                          to={"/metric/" + metric.name}
-                          className={({ isActive }) =>
-                             isActive
-                                ? "font-bold text-gray-300"
-                                : "font-light text-gray-300"
-                          }
-                       >
-                          {metric.name}
-                       </NavLink>
-                    </li>
-                 ))
+               ? props.metrics
+                    .filter((metric) => metric !== undefined)
+                    .map((metric) => (
+                       <li key={metric._id} className="text-sm truncate py-2">
+                          <NavLink
+                             to={"/metric/" + metric.name}
+                             className={({ isActive }) =>
+                                isActive
+                                   ? "font-bold text-gray-300"
+                                   : "font-light text-gray-300"
+                             }
+                          >
+                             {metric.name}
+                          </NavLink>
+                       </li>
+                    ))
                : ""}
             <li className="font-light text-sm py-2 text-gray-300">
                <NavLink

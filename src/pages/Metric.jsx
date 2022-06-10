@@ -36,13 +36,15 @@ export default function Metric(props) {
       });
 
       //redirect if metric doesn't exist
-      const metricNames = props.metrics.map((metric) => metric.name);
+      if (props.metrics !== null) {
+         const metricNames = props.metrics.map((metric) => metric.name);
 
-      if (!metricNames.includes(param.name)) {
-         console.log("metric doesn't exist");
-         navigate("/addmetric");
+         if (!metricNames.includes(param.name)) {
+            console.log("metric doesn't exist");
+            navigate("/addmetric");
+         }
       }
-   });
+   }, [navigate, param.name, props.metrics]);
 
    return (
       <>

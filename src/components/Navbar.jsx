@@ -12,7 +12,7 @@ export default function Menu(props) {
    const location = useLocation();
 
    useEffect(() => {
-      if (props.metrics.length)
+      if (props.metrics !== null && props.metrics.length)
          setFirstMetric(`/metric/${props.metrics[0].name}`);
    }, [props.metrics]);
 

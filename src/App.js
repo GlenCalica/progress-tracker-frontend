@@ -27,7 +27,7 @@ function App() {
       email: "",
    });
 
-   const [metrics, setMetrics] = useState([]);
+   const [metrics, setMetrics] = useState(null);
 
    useEffect(() => {
       const user = AuthService.getCurrentUser();

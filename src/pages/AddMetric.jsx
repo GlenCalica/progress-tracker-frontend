@@ -27,12 +27,13 @@ export default function AddMetric(props) {
 
       if (!metricNames.includes(name)) {
          //Add new metric
-         MetricService.add(formData);
-         //Need to make an api call to get the new metric id
-         MetricService.get().then((res) => {
-            const newMetric = res.find((metric) => metric.name === name);
-            props.setMetrics((prevState) => [...prevState, newMetric]);
-            navigate(`/metric/${name}`);
+         MetricService.add(formData).then((res) => {
+            //Need to make an api call to get the new metric id
+            MetricService.get().then((res) => {
+               const newMetric = res.find((metric) => metric.name === name);
+               props.setMetrics((prevState) => [...prevState, newMetric]);
+               navigate(`/metric/${name}`);
+            });
          });
       } else {
          console.log("metric already exists");
