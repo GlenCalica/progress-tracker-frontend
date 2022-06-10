@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import AuthService from "../services/auth.service";
 import UserService from "../services/user.service";
 
-export default function Logout() {
+export default function DeleteUser(props) {
    const [password, setPassword] = useState("");
 
    const navigate = useNavigate();
@@ -17,6 +17,7 @@ export default function Logout() {
       e.preventDefault();
 
       UserService.delete(password).then((res) => {
+         props.toggle();
          AuthService.logout();
          navigate("/login");
       });
@@ -31,7 +32,8 @@ export default function Logout() {
          >
             <div>
                <div className="my-4">
-                  <label htmlFor="password">Current Password</label>
+                  <p>This cannot be undone.</p>
+                  <p>Please type your password to delete your account</p>
                   <br />
                   <input
                      type="password"
