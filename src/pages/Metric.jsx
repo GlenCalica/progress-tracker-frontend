@@ -5,6 +5,7 @@ import PopupWrapper from "../components/PopupWrapper";
 import UpdateMetricForm from "../components/UpdateMetricForm";
 import DeleteMetric from "../components/DeleteMetric";
 import EntriesTable from "../components/EntriesTable";
+import AddEntryForm from "../components/AddEntryForm";
 
 export default function Metric(props) {
    const [popup, setPopup] = useState(false);
@@ -49,6 +50,7 @@ export default function Metric(props) {
                }
             />
             <DeleteMetric name={param.name} setMetrics={props.setMetrics} />
+            <AddEntryForm metric={param.name} />
             <EntriesTable metric={param.name} />
          </section>
       </>

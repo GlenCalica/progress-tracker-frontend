@@ -9,7 +9,12 @@ class EntryService {
       return response.data.filter((entry) => entry.metric === metric);
    }
 
-   async add() {}
+   async add(data) {
+      const response = await axios.post(API_URL, data, {
+         headers: authHeader(),
+      });
+      return response.data;
+   }
 
    async update() {}
 
