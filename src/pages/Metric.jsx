@@ -25,9 +25,7 @@ export default function Metric(props) {
    const [entries, setEntries] = useState([]);
 
    const updateEntries = () => {
-      EntryService.get(param.name).then((res) => {
-         setEntries(res);
-      });
+      EntryService.get(param.name).then((res) => setEntries(res));
    };
 
    useEffect(() => {
@@ -70,7 +68,11 @@ export default function Metric(props) {
             />
             <DeleteMetric name={param.name} setMetrics={props.setMetrics} />
             <AddEntryForm metric={param.name} updateEntries={updateEntries} />
-            <EntriesTable metric={param.name} entries={entries} />
+            <EntriesTable
+               metric={param.name}
+               entries={entries}
+               updateEntries={updateEntries}
+            />
          </section>
       </>
    );

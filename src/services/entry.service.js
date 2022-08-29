@@ -18,7 +18,19 @@ class EntryService {
 
    async update() {}
 
-   async delete() {}
+   async delete(metric, id) {
+      const entries = await this.get(metric);
+
+      const entry = entries.find((entry) => {
+         return entry._id === id;
+      });
+
+      const response = axios.delete(API_URL + entry._id, {
+         headers: authHeader(),
+      });
+
+      return response;
+   }
 }
 
 export default new EntryService();

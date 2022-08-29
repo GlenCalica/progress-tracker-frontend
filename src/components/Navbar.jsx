@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 
-import barchart from "../icons/bar-chart.svg";
-import person from "../icons/person.svg";
-import settings from "../icons/settings.svg";
+import barchartIcon from "../icons/bar-chart.svg";
+import personIcon from "../icons/person.svg";
+import settingsIcon from "../icons/settings.svg";
 
 export default function Menu(props) {
    //Sets NavLink path to first metric or AddMetric page
@@ -34,7 +34,11 @@ export default function Menu(props) {
                         : "flex my-2 py-2 px-2 rounded-md hover:bg-slate-800"
                   }
                >
-                  <img src={barchart} alt="metrics icon" className="h-5 px-2" />
+                  <img
+                     src={barchartIcon}
+                     alt="metrics icon"
+                     className="h-5 px-2"
+                  />
                   <p className="font-light text-gray-300">Metrics</p>
                </NavLink>
             </li>
@@ -48,7 +52,11 @@ export default function Menu(props) {
                         : "flex my-2 py-2 px-2 rounded-md hover:bg-slate-800"
                   }
                >
-                  <img src={person} alt="metrics icon" className="h-5 px-2" />
+                  <img
+                     src={personIcon}
+                     alt="metrics icon"
+                     className="h-5 px-2"
+                  />
                   <p className="font-light text-gray-300">{props.name}</p>
                </NavLink>
             </li>
@@ -61,7 +69,11 @@ export default function Menu(props) {
                         : "flex my-2 py-2 px-2 rounded-md hover:bg-slate-800"
                   }
                >
-                  <img src={settings} alt="metrics icon" className="h-5 px-2" />
+                  <img
+                     src={settingsIcon}
+                     alt="metrics icon"
+                     className="h-5 px-2"
+                  />
                   <p className="font-light text-gray-300">Settings</p>
                </NavLink>
             </li>
