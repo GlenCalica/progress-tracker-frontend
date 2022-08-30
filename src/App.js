@@ -74,17 +74,17 @@ function App() {
    return (
       <BrowserRouter>
          <Routes>
-            <Route
-               path="/"
-               element={wrapNavbar(<Home clearData={clearData} />)}
-            />
+            <Route path="/" element={wrapNavbar(<Home />)} />
             <Route
                path="/metric/:name"
                element={wrapMetricsNavbar(
                   <Metric metrics={metrics} setMetrics={setMetrics} />
                )}
             />
-            <Route path="/profile" element={wrapNavbar(<Profile />)} />
+            <Route
+               path="/profile"
+               element={wrapNavbar(<Profile clearData={clearData} />)}
+            />
             <Route path="/settings" element={wrapNavbar(<Settings />)} />
             <Route
                path="/login"

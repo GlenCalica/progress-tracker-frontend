@@ -2,12 +2,13 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 import UpdateUserPassword from "../components/UpdateUserPassword";
+import Logout from "../components/Logout";
 import DeleteUser from "../components/DeleteUser";
 import PopupWrapper from "../components/PopupWrapper";
 
 import UserService from "../services/user.service";
 
-export default function Profile() {
+export default function Profile(props) {
    //for DeleteUser
    const [popup, setPopup] = useState(false);
 
@@ -38,6 +39,8 @@ export default function Profile() {
          <p>Email: {email}</p>
 
          <UpdateUserPassword />
+         <Logout clearData={props.clearData} />
+
          <button
             onClick={togglePopup}
             className="w-36 my-2 p-3 rounded bg-slate-400"
