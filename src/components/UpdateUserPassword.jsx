@@ -38,8 +38,7 @@ export default function Profile() {
       <>
          <form
             onSubmit={onSubmit}
-            style={{ width: "32rem" }}
-            className="my-6 p-6 rounded-xl bg-slate-200"
+            className="my-6 p-6 max-w-lg rounded-xl bg-slate-200"
          >
             <div>
                <div className="my-4">

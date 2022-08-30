@@ -11,7 +11,10 @@ export default function Logout(props) {
    };
 
    return (
-      <button className="w-36 my-2 p-3 rounded bg-slate-400" onClick={logout}>
+      <button
+         className="w-36 my-2 mr-2 p-3 rounded bg-slate-400"
+         onClick={logout}
+      >
          Logout
       </button>
    );

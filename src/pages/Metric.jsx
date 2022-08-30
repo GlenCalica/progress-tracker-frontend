@@ -50,7 +50,7 @@ export default function Metric(props) {
             <h1>{param.name}</h1>
             <button
                onClick={togglePopup}
-               className="w-36 my-2 p-3 rounded bg-slate-400"
+               className="w-36 my-2 mr-2 p-3 rounded bg-slate-400"
             >
                Edit
             </button>

@@ -36,23 +36,22 @@ export default function Home() {
             <li>JWT Authentication and Authorization</li>
          </ul>
 
-         <button className="w-28 my-2 mr-2 rounded bg-slate-400">
-            <a href="https://github.com/GlenCalica" className="flex p-2">
+         <button className="w-28 my-2 mr-2 pr-1 rounded bg-slate-400">
+            <a
+               href="https://github.com/GlenCalica"
+               className="flex justify-center p-1"
+            >
                <img src={githubIcon} alt="Github" className="h-10" />
-               <p className="mt-2 h-6 align-bottom">GitHub</p>
+               <p className="mt-2 h-6">GitHub</p>
             </a>
          </button>
-         <button className="w-28 my-2 rounded bg-slate-400">
+         <button className="w-30 my-2 pr-2 rounded bg-slate-400">
             <a
                href="https://www.linkedin.com/in/glencalica/"
-               className="flex p-2"
+               className="flex justify-center p-1"
             >
-               <img
-                  src={linkedinIcon}
-                  alt="LinkedIn"
-                  className="h-10 py-2 px-1"
-               />
-               <p className="mt-2 h-6 align-bottom">LinkedIn</p>
+               <img src={linkedinIcon} alt="LinkedIn" className="h-10 p-2" />
+               <p className="mt-2 h-6">LinkedIn</p>
             </a>
          </button>
       </div>

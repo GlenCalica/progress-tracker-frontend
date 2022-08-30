@@ -36,12 +36,11 @@ export default function AddEntryForm(props) {
    return (
       <form
          onSubmit={onSubmit}
-         style={{ width: "26rem" }}
-         className="my-6 p-6 rounded-xl bg-slate-200"
+         className="my-6 p-6 max-w-md rounded-xl bg-slate-200"
       >
          <h2 className="font-bold text-xl">New Entry</h2>
          <div className="flex flex-wrap">
-            <div>
+            <div className="mr-4 mt-2">
                <label htmlFor="date">Date</label>
                <br />
                <input
@@ -54,7 +53,7 @@ export default function AddEntryForm(props) {
                />
             </div>
 
-            <div className="mx-4">
+            <div className="mr-4 mt-2">
                <label htmlFor="value">Value</label>
                <br />
                <input
@@ -68,7 +67,7 @@ export default function AddEntryForm(props) {
             </div>
             <button
                type="submit"
-               className="self-end w-20 h-10 rounded bg-slate-400"
+               className="self-end w-20 h-10 mt-4 rounded bg-slate-400"
             >
                Add
             </button>

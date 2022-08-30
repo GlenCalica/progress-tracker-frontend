@@ -35,8 +35,8 @@ export default function EntriesTable(props) {
 
    return (
       <>
-         <div className="my-6 p-6 rounded-xl bg-slate-100">
-            <table className="">
+         <div className="my-6 p-6 max-w-2xl rounded-xl bg-slate-100">
+            <table>
                <thead>
                   <tr>
                      <th className="p-2">Date</th>
