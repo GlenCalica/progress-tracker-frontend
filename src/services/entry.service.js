@@ -16,19 +16,23 @@ class EntryService {
       return response.data;
    }
 
-   async update() {}
+   async update(metric, id, data) {
+      const entries = await this.get(metric);
+      const entry = entries.find((entry) => entry._id === id);
+
+      const response = axios.put(API_URL + entry._id, data, {
+         headers: authHeader(),
+      });
+      return response;
+   }
 
    async delete(metric, id) {
       const entries = await this.get(metric);
-
-      const entry = entries.find((entry) => {
-         return entry._id === id;
-      });
+      const entry = entries.find((entry) => entry._id === id);
 
       const response = axios.delete(API_URL + entry._id, {
          headers: authHeader(),
       });
-
       return response;
    }
 }

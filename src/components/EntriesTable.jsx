@@ -1,3 +1,8 @@
+import { useState } from "react";
+
+import PopupWrapper from "./PopupWrapper";
+import UpdateEntryForm from "./UpdateEntryForm";
+
 import EntryService from "../services/entry.service";
 
 import updateIcon from "../icons/pencil.svg";
@@ -9,6 +14,23 @@ export default function EntriesTable(props) {
          (res) => props.updateEntries(),
          (err) => console.log(err)
       );
+   };
+
+   const [popup, setPopup] = useState(false);
+   const [entryForm, setEntryForm] = useState({ _id: "", date: "", value: "" });
+
+   const togglePopup = (id) => {
+      if (!popup) {
+         EntryService.get(props.metric).then((res) => {
+            const entry = res.find((entry) => entry._id === id);
+            setEntryForm({
+               _id: entry._id,
+               date: entry.date,
+               value: entry.value,
+            });
+         });
+      }
+      setPopup(!popup);
    };
 
    return (
@@ -41,7 +63,7 @@ export default function EntriesTable(props) {
                                    )}
                                 </td>
                                 <td className="p-2">{entry.value}</td>
-                                <td>
+                                <td onClick={() => togglePopup(entry._id)}>
                                    <img
                                       src={updateIcon}
                                       alt="update"
@@ -60,6 +82,20 @@ export default function EntriesTable(props) {
                      : ""}
                </tbody>
             </table>
+            <PopupWrapper
+               show={popup}
+               toggle={togglePopup}
+               item={
+                  <UpdateEntryForm
+                     toggle={togglePopup}
+                     entryForm={entryForm}
+                     setEntryForm={setEntryForm}
+                     metric={props.metric}
+                     updateEntries={props.updateEntries}
+                     togglePopup={togglePopup}
+                  />
+               }
+            />
          </div>
       </>
    );

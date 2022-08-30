@@ -1,17 +1,10 @@
-import { useState } from "react";
-
 import EntryService from "../services/entry.service";
 
-export default function AddEntryForm(props) {
-   const [formData, setFormData] = useState({
-      date: "",
-      value: "",
-   });
-
-   const { date, value } = formData;
+export default function UpdateEntryForm(props) {
+   const { _id, date, value } = props.entryForm;
 
    const onChange = (e) => {
-      setFormData((prevState) => ({
+      props.setEntryForm((prevState) => ({
          ...prevState,
          [e.target.name]: e.target.value,
       }));
@@ -20,37 +13,38 @@ export default function AddEntryForm(props) {
    const onSubmit = (e) => {
       e.preventDefault();
 
-      EntryService.add({
-         metric: props.metric,
-         ...formData,
-      });
+      EntryService.update(props.metric, _id, { value }).then((res) =>
+         props.updateEntries()
+      );
 
-      setFormData({
-         date: "",
-         value: "",
-      });
-
-      props.updateEntries();
+      props.togglePopup();
    };
 
    return (
       <form
          onSubmit={onSubmit}
          style={{ width: "26rem" }}
-         className="my-6 p-6 rounded-xl bg-slate-200"
+         className="rounded-xl bg-slate-200"
       >
-         <h2 className="font-bold text-xl">New Entry</h2>
-         <div className="flex flex-wrap">
+         <div className="px-6 py-4 rounded-t-lg bg-slate-300">
+            <h1 className="text-lg font-normal">Update Entry</h1>
+         </div>
+         <div className="flex flex-wrap p-6">
             <div>
                <label htmlFor="date">Date</label>
                <br />
                <input
-                  type="date"
+                  type="text"
                   id="date"
                   name="date"
-                  value={date}
+                  value={new Date(date).toLocaleDateString("en-US", {
+                     month: "short",
+                     day: "numeric",
+                     year: "numeric",
+                  })}
                   onChange={onChange}
-                  className="w-34 mt-1 p-2 rounded"
+                  className="w-32 mt-1 p-2 rounded bg-slate-300"
+                  readOnly
                />
             </div>
 
@@ -70,7 +64,7 @@ export default function AddEntryForm(props) {
                type="submit"
                className="self-end w-20 h-10 rounded bg-slate-400"
             >
-               Add
+               Update
             </button>
          </div>
       </form>
