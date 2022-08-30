@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
+import MetricChart from "../components/MetricChart";
 import PopupWrapper from "../components/PopupWrapper";
 import UpdateMetricForm from "../components/UpdateMetricForm";
 import DeleteMetric from "../components/DeleteMetric";
@@ -67,6 +68,7 @@ export default function Metric(props) {
                }
             />
             <DeleteMetric name={param.name} setMetrics={props.setMetrics} />
+            <MetricChart metric={param.name} entries={entries} />
             <AddEntryForm metric={param.name} updateEntries={updateEntries} />
             <EntriesTable
                metric={param.name}
