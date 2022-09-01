@@ -53,8 +53,11 @@ export default function Register(props) {
             style={{ width: "32rem" }}
          >
             <h1 className="text-3xl">Create an account</h1>
+            <p className="text-sm mt-2">
+               *This is a portfolio project. Please use a throwaway password.
+            </p>
             <div>
-               <div className="my-4">
+               <div className="my-2">
                   <label htmlFor="name">Name</label>
                   <br />
                   <input

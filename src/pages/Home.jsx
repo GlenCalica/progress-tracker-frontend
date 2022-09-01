@@ -11,6 +11,12 @@ export default function Home() {
          </p>
 
          <p>
+            This website is still not complete; I'll be revisiting this website
+            in the future. One glaring issue is that this website isn't mobile
+            friendly.
+         </p>
+
+         <p>
             This website is a MERN Stack project that also showcases my ability
             to design websites.
          </p>
@@ -19,6 +25,7 @@ export default function Home() {
             <li>React</li>
             <li>React Router</li>
             <li>TailwindCSS</li>
+            <li>ChartJS</li>
          </ul>
 
          <h2>Back-end</h2>
