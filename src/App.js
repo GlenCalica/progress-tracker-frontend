@@ -10,6 +10,7 @@ import Profile from "./pages/Profile";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import PrivateRoute from "./components/PrivateRoute";
 
 import Navbar from "./components/Navbar";
 import MetricsNavbar from "./components/MetricsNavbar";
@@ -74,18 +75,34 @@ function App() {
    return (
       <BrowserRouter>
          <Routes>
-            <Route path="/" element={wrapNavbar(<Home />)} />
-            <Route
-               path="/metric/:name"
-               element={wrapMetricsNavbar(
-                  <Metric metrics={metrics} setMetrics={setMetrics} />
-               )}
-            />
-            <Route
-               path="/profile"
-               element={wrapNavbar(<Profile clearData={clearData} />)}
-            />
-            <Route path="/settings" element={wrapNavbar(<Settings />)} />
+            <Route path="/" element={<PrivateRoute />}>
+               <Route path="/" element={wrapNavbar(<Home />)} />
+            </Route>
+            <Route path="/metric/:name" element={<PrivateRoute />}>
+               <Route
+                  path="/metric/:name"
+                  element={wrapMetricsNavbar(
+                     <Metric metrics={metrics} setMetrics={setMetrics} />
+                  )}
+               />
+            </Route>
+            <Route path="/profile" element={<PrivateRoute />}>
+               <Route
+                  path="/profile"
+                  element={wrapNavbar(<Profile clearData={clearData} />)}
+               />
+            </Route>
+            <Route path="/settings" element={<PrivateRoute />}>
+               <Route path="/settings" element={wrapNavbar(<Settings />)} />
+            </Route>
+            <Route path="/addmetric" element={<PrivateRoute />}>
+               <Route
+                  path="/addmetric"
+                  element={wrapMetricsNavbar(
+                     <AddMetric metrics={metrics} setMetrics={setMetrics} />
+                  )}
+               />
+            </Route>
             <Route
                path="/login"
                element={
@@ -95,12 +112,6 @@ function App() {
             <Route
                path="/register"
                element={<Register setUser={setCurrentUser} />}
-            />
-            <Route
-               path="/addmetric"
-               element={wrapMetricsNavbar(
-                  <AddMetric metrics={metrics} setMetrics={setMetrics} />
-               )}
             />
             <Route path="*" element={<NotFound />} />
          </Routes>
