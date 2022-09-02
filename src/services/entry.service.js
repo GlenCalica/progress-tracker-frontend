@@ -1,7 +1,7 @@
 import axios from "axios";
 import authHeader from "./auth-header";
 
-const API_URL = "http://localhost:8080/api/entries/";
+const API_URL = "https://progress-tracker-mern.herokuapp.com/api/entries/";
 
 class EntryService {
    async get(metric) {

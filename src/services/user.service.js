@@ -2,7 +2,7 @@ import axios from "axios";
 import authHeader from "./auth-header";
 import AuthService from "./auth.service";
 
-const API_URL = "http://localhost:8080/api/users/";
+const API_URL = "https://progress-tracker-mern.herokuapp.com/api/users/";
 
 class UserService {
    async get() {
