@@ -32,7 +32,7 @@ export default function MetricChart(props) {
                label: props.metric,
                backgroundColor: "rgb(255, 99, 132)",
                borderColor: "rgb(255, 99, 132)",
-               data: props.entries.map((entry) => entry.value),
+               data: props.entries.map((entry) => entry.value).reverse(),
             },
          ],
       });
